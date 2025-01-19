@@ -1,0 +1,41 @@
+@use 'variables' as *;
+@use 'media-queries' as *;
+
+.game-board {
+  margin: 0 auto;
+  max-width: 60rem;
+  padding-top: clamp(6.5rem, 5.429rem + 2.857vw, 8rem);
+  position: relative;
+  z-index: 5;
+
+  .row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: clamp(1rem, 0.643rem + 0.952vw, 1.5rem) 0;
+
+    .cell {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+
+      .game-icon {
+        transform: scale(0.75);
+
+        @include phone {
+          transform: scale(1)
+        }
+
+        @include desktop {
+          transform: scale(1.15);
+        }
+      }
+
+      &-color {
+        height: clamp(0.75rem, 0.393rem + 0.952vw, 1.25rem);
+      }
+    }
+  }
+}
