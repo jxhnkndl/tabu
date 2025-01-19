@@ -1,0 +1,65 @@
+@use 'variables' as *;
+
+.yellow-bg {
+  background-color: $yellow;
+}
+
+.yellow-text {
+  color: $yellow;
+}
+
+.green-bg {
+  background-color: $green;
+}
+
+.green-text {
+  color: $green;
+}
+
+.orange-bg {
+  background-color: $orange;
+}
+
+.orange-text {
+  color: $orange;
+}
+
+.purple-bg {
+  color: $purple;
+}
+
+.purple-text {
+  color: $purple;
+}
+
+.blue-bg {
+  background-color: $blue;
+}
+
+.blue-text {
+  color: $blue;
+}
+
+.charcoal-bg {
+  background-color: $charcoal;
+}
+
+.charcoal-text {
+  color: $charcoal;
+}
+
+.dark-bg {
+  background-color: $dark;
+}
+
+.dark-text {
+  color: $dark;
+}
+
+.light-bg {
+  background-color: $light;
+}
+
+.light-text {
+  color: $light;
+}
