@@ -1,0 +1,12 @@
+{
+  "name": "tabu",
+  "version": "1.0.0",
+  "scripts": {
+    "watch": "sass --watch ./sass/main.scss ./assets/styles/style.css"
+  },
+  "author": "jxhnkndl",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.83.4"
+  }
+}
