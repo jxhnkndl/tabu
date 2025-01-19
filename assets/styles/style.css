@@ -78,4 +78,34 @@
   position: relative;
 }
 
+.hero-section {
+  min-height: 100vh;
+}
+.hero-section .hero-section-bg {
+  background-image: url("../images/background/corn-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  bottom: 0;
+  filter: grayscale(100%);
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: rotate(180deg);
+  width: 100%;
+  z-index: 1;
+}
+.hero-section .hero-section-bg-overlay {
+  background-color: #1e1e1e;
+  bottom: 0;
+  left: 0;
+  opacity: 0.9;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
 /*# sourceMappingURL=style.css.map */
