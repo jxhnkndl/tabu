@@ -1,0 +1,77 @@
+@use 'variables' as *;
+@use 'media-queries' as *;
+
+.header {
+  background: linear-gradient(to bottom, #1e1e1e, transparent);
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 5;
+
+  &-container {
+    align-items: center;
+    display: flex;
+    height: clamp(5rem, 3.897rem + 3.676vw, 6.25rem);
+    justify-content: space-between;
+
+    .logo-container {
+      width: clamp(4.75rem, 3.647rem + 3.676vw, 6rem);
+
+      .logo {
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+
+    .menu-container {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .menu-bars {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+
+        .menu-bar {
+          height: 1.5px;
+
+          @include tablet {
+            height: 2.5px;
+          }
+        }
+
+        .menu-bar-top {
+          width: 45px;
+        }
+
+        .menu-bar-middle-top {
+          width: 35px;
+        }
+
+        .menu-bar-middle-bottom {
+          width: 25px;
+        }
+
+        .menu-bar-bottom {
+          width: 10px;
+        }
+      }
+    }
+  }
+}
+
+.navbar {
+  bottom: 0;
+  display: none;
+  left: 0;
+  min-height: 100vh;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10;
+}
