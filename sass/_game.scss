@@ -10,10 +10,6 @@
   transition: opacity 0.5;
   z-index: 5;
 
-  &-active {
-    opacity: 1;
-  }
-
   .row {
     align-items: center;
     display: flex;

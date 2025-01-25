@@ -23,7 +23,7 @@
 }
 
 .purple-bg {
-  color: #7933C1;
+  background-color: #7933C1;
 }
 
 .purple-text {
@@ -203,9 +203,6 @@
   position: relative;
   transition: opacity 0.5;
   z-index: 5;
-}
-.game-board-active {
-  opacity: 1;
 }
 .game-board .row {
   align-items: center;
