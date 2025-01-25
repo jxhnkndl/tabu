@@ -1,9 +1,6 @@
 const gameBoardEl = document.querySelector('.game-board');
 const colorBarsEl = document.querySelectorAll('.cell-color');
 const allIconsEl = document.querySelectorAll('.game-icon');
-const hiddenPlayableIconsEl = document.querySelectorAll(
-  '.game-icon-hidden.game-icon-playable'
-);
 const playableIconsEl = document.querySelectorAll('.game-icon-playable');
 
 const resetBoard = () => {
@@ -42,53 +39,55 @@ const resetColorBars = () => {
   colorBarsEl[4].classList.replace('orange-bg', 'blue-bg');
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  const introAnimation = gsap.to(allIconsEl, {
-    opacity: 1,
-    duration: 0.5,
-    yoyo: true,
-    repeat: -1,
-    stagger: 0.05,
-    ease: 'easeInOut',
-  });
+const introAnimation = gsap.to(allIconsEl, {
+  opacity: 1,
+  duration: 0.5,
+  yoyo: true,
+  repeat: -1,
+  stagger: 0.05,
+  ease: 'easeInOut',
+});
 
-  gameBoardEl.addEventListener('click', async (e) => {
-    introAnimation.kill();
+const handleGameBoardReset = async () => {
+  introAnimation.kill();
 
-    gsap
-      .to(allIconsEl, {
+  gsap
+    .to(allIconsEl, {
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: 'easeInOut',
+    })
+    .then(() => {
+      gsap.to(colorBarsEl, {
         opacity: 0,
         duration: 0.5,
         stagger: 0.05,
         ease: 'easeInOut',
-      })
-      .then(() => {
-        gsap.to(colorBarsEl, {
-          opacity: 0,
-          duration: 0.5,
-          stagger: 0.05,
-          ease: 'easeInOut',
-        });
       });
+    });
 
-    await resetBoard();
+  await resetBoard();
 
-    console.log('BOARD RESET');
+  console.log('BOARD RESET');
 
-    gsap
-      .to(playableIconsEl, {
+  gsap
+    .to(playableIconsEl, {
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: 'easeInOut',
+    })
+    .then(() => {
+      gsap.to(colorBarsEl, {
         opacity: 1,
         duration: 0.5,
         stagger: 0.05,
         ease: 'easeInOut',
-      })
-      .then(() => {
-        gsap.to(colorBarsEl, {
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.05,
-          ease: 'easeInOut',
-        });
       });
-  });
-});
+    });
+
+  gameBoardEl.removeEventListener('click', handleGameBoardReset);
+};
+
+gameBoardEl.addEventListener('click', handleGameBoardReset);
