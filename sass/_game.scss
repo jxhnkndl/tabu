@@ -2,11 +2,17 @@
 @use 'media-queries' as *;
 
 .game-board {
+  cursor: pointer;
   margin: 0 auto;
   max-width: 60rem;
   padding-top: clamp(6.5rem, 5.429rem + 2.857vw, 8rem);
   position: relative;
+  transition: opacity 0.5;
   z-index: 5;
+
+  &-active {
+    opacity: 1;
+  }
 
   .row {
     align-items: center;
@@ -23,6 +29,7 @@
 
       .game-icon {
         transform: scale(0.75);
+        transition: all 0.25 ease-in-out;
 
         @include phone {
           transform: scale(1)
@@ -31,11 +38,26 @@
         @include desktop {
           transform: scale(1.15);
         }
+
+        &-init {
+          opacity: 0.35;
+        }
+
+        &-hidden {
+          display: none;
+          opacity: 0;
+        }
       }
 
       &-color {
         height: clamp(0.75rem, 0.393rem + 0.952vw, 1.25rem);
       }
     }
+  }
+}
+
+.game-icon {
+  &-hidden {
+    display: none;
   }
 }
