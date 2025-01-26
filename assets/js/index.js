@@ -5,7 +5,7 @@ const colorBarsEl = document.querySelectorAll('.cell-color');
 const allIconsEl = document.querySelectorAll('.game-icon');
 const playableIconsEl = document.querySelectorAll('.game-icon-playable');
 
-const gameIcons = [
+const gameMatrix = [
   [
     {
       id: 'cell-1a',
@@ -198,12 +198,68 @@ const scoreboard = {
   green: 0,
   orange: 0,
   purple: 0,
-  yellow: 0,
-}
+  yellow: 1,
+};
 
+let activeGame = false;
 let winner = false;
 
-/**** ANIMATIONS ****/
+/**** GAME LOGIC ****/
+
+// capture user clicks
+gameBoardEl.addEventListener('click', (e) => {
+  let clickedEl = e.target;
+  let clickedCell;
+
+  // ensure icon's parent cell is the captured target element
+  if (clickedEl.classList.contains('cell')) {
+    clickedCell = clickedEl;
+  } else if (clickedEl.parentElement.classList.contains('cell')) {
+    clickedCell = clickedEl.parentElement;
+  }
+
+  // match clicked icon with matching icon in game matrix
+  if (clickedCell && !winner && activeGame) {
+    let cellId = clickedCell.classList[1];
+    let rowId = cellId.split('-')[1].split('')[0];
+    let matchingRow = gameMatrix[rowId - 1];
+
+    let matchingCell = matchingRow.find((cell) => {
+      return cell.id === cellId && !cell.revealed;
+    });
+
+    handleIconClick(clickedCell, matchingCell);
+  }
+});
+
+// update ui and game state after icon click
+const handleIconClick = (clickedCell, matchingCell) => {
+  // fade dark icon out of viewport
+  gsap.to(clickedCell, {
+    opacity: 0,
+    duration: 0.25,
+    ease: 'power3.inOut',
+  });
+
+  // reset the game icon's src to the colored icon
+  // fade icon back into viewport
+  setTimeout(() => {
+    clickedCell.children[0].src = matchingCell.iconPath;
+
+    gsap.to(clickedCell, {
+      opacity: 1,
+      duration: 0.25,
+      ease: 'power3.inOut',
+    });
+  }, 250);
+
+  // increase color's click count
+  scoreboard[matchingCell.color] += 1;
+
+  console.log(scoreboard);
+};
+
+/**** INTRO ANIMATIONS ****/
 
 // intro opacity wave
 const introAnimation = gsap
@@ -213,9 +269,9 @@ const introAnimation = gsap
     yoyo: true,
     repeat: -1,
     stagger: 0.05,
-    ease: 'easeInOut',
+    ease: 'power3.inOut',
   })
-  .repeatDelay(1);
+  .repeatDelay(0.25);
 
 // swap game icon classes to set board for game play
 const resetBoard = () => {
@@ -258,14 +314,14 @@ const handleGameBoardReset = async () => {
       opacity: 0,
       duration: 0.5,
       stagger: 0.05,
-      ease: 'easeInOut',
+      ease: 'power3.inOut',
     })
     .then(() => {
       gsap.to(colorBarsEl, {
         opacity: 0,
         duration: 0.5,
         stagger: 0.05,
-        ease: 'easeInOut',
+        ease: 'power3.inOut',
       });
     });
 
@@ -278,16 +334,18 @@ const handleGameBoardReset = async () => {
       opacity: 1,
       duration: 0.5,
       stagger: 0.05,
-      ease: 'easeInOut',
+      ease: 'power3.inOut',
     })
     .then(() => {
       gsap.to(colorBarsEl, {
         opacity: 1,
         duration: 0.5,
         stagger: 0.05,
-        ease: 'easeInOut',
+        ease: 'power3.inOut',
       });
     });
+
+  activeGame = true;
 
   gameBoardEl.removeEventListener('click', handleGameBoardReset);
 };
