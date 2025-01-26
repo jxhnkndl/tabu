@@ -1,11 +1,9 @@
-// dom elements
+/**** GLOBALS ****/
 
 const gameBoardEl = document.querySelector('.game-board');
 const colorBarsEl = document.querySelectorAll('.cell-color');
 const allIconsEl = document.querySelectorAll('.game-icon');
 const playableIconsEl = document.querySelectorAll('.game-icon-playable');
-
-// game logic variables
 
 const gameIcons = [
   [
@@ -195,17 +193,29 @@ const gameIcons = [
   ],
 ];
 
+const scoreboard = {
+  blue: 0,
+  green: 0,
+  orange: 0,
+  purple: 0,
+  yellow: 0,
+}
+
+let winner = false;
+
 /**** ANIMATIONS ****/
 
 // intro opacity wave
-const introAnimation = gsap.to(allIconsEl, {
-  opacity: 1,
-  duration: 0.5,
-  yoyo: true,
-  repeat: -1,
-  stagger: 0.05,
-  ease: 'easeInOut',
-});
+const introAnimation = gsap
+  .to(allIconsEl, {
+    opacity: 0.5,
+    duration: 0.5,
+    yoyo: true,
+    repeat: -1,
+    stagger: 0.05,
+    ease: 'easeInOut',
+  })
+  .repeatDelay(1);
 
 // swap game icon classes to set board for game play
 const resetBoard = () => {
@@ -214,17 +224,11 @@ const resetBoard = () => {
       allIconsEl.forEach((icon) => {
         icon.classList.remove('game-icon-init');
 
-        if (
-          icon.classList.contains('letter') ||
-          icon.classList.contains('dead-symbol')
-        ) {
+        if (icon.classList.contains('game-icon-decorative')) {
           icon.classList.add('game-icon-hidden');
         }
 
-        if (
-          icon.classList.contains('game-icon-hidden') &&
-          icon.classList.contains('game-icon-playable')
-        ) {
+        if (icon.classList.contains('game-icon-playable')) {
           icon.classList.remove('game-icon-hidden');
         }
       });

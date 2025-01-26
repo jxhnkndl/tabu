@@ -217,33 +217,30 @@
   justify-content: center;
   width: 100%;
 }
-.game-board .row .cell .game-icon {
-  transform: scale(0.75);
-  transition: all 0.25 ease-in-out;
-}
-@media (min-width: 30rem) {
-  .game-board .row .cell .game-icon {
-    transform: scale(1);
-  }
-}
-@media (min-width: 64rem) {
-  .game-board .row .cell .game-icon {
-    transform: scale(1.15);
-  }
-}
-.game-board .row .cell .game-icon-init {
-  opacity: 0.35;
-}
-.game-board .row .cell .game-icon-hidden {
-  display: none;
-  opacity: 0;
-}
 .game-board .row .cell-color {
   height: clamp(0.75rem, 0.393rem + 0.952vw, 1.25rem);
 }
 
+.game-icon {
+  transform: scale(0.75);
+  transition: all 0.25 ease-in-out;
+}
+@media (min-width: 30rem) {
+  .game-icon {
+    transform: scale(1);
+  }
+}
+@media (min-width: 64rem) {
+  .game-icon {
+    transform: scale(1.15);
+  }
+}
+.game-icon-init {
+  opacity: 1;
+}
 .game-icon-hidden {
   display: none;
+  opacity: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
