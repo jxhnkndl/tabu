@@ -319,10 +319,12 @@ const resetBoard = () => {
       allIconsEl.forEach((icon) => {
         icon.classList.remove('game-icon-init');
 
+        // hide decorative icons (letters, extra dark icons)
         if (icon.classList.contains('game-icon-decorative')) {
           icon.classList.add('game-icon-hidden');
         }
 
+        // reveal hidden playable icons
         if (icon.classList.contains('game-icon-playable')) {
           icon.classList.remove('game-icon-hidden');
         }
@@ -337,11 +339,13 @@ const resetBoard = () => {
 
 // reset color bars from init to match playable icon colors
 const resetColorBars = () => {
+  // reset background colors
   colorBarsEl[0].classList.replace('light-bg', 'purple-bg');
   colorBarsEl[1].classList.replace('daisy-bg', 'green-bg');
   colorBarsEl[3].classList.replace('sunset-bg', 'orange-bg');
   colorBarsEl[4].classList.replace('orange-bg', 'blue-bg');
 
+  // add borders to aid in progress tracking
   colorContainersEl[0].classList.add('purple-border');
   colorContainersEl[1].classList.add('green-border');
   colorContainersEl[2].classList.add('yellow-border');
@@ -353,6 +357,8 @@ const resetColorBars = () => {
 const revealFirstIcon = () => {
   const matchingCell = gameMatrix[2][2];
 
+  // pass starting cell through game logic chain
+  // swap dark icon for themed icon and update color bar
   handleIconClick(firstIconEl, matchingCell);
 };
 
@@ -360,6 +366,7 @@ const revealFirstIcon = () => {
 const handleGameBoardReset = async () => {
   introAnimation.kill();
 
+  // animate icons and color bars out before theme change
   gsap
     .to(allIconsEl, {
       opacity: 0,
@@ -384,8 +391,10 @@ const handleGameBoardReset = async () => {
       })
     });
 
+  // reset theme of the color bars
   await resetBoard();
 
+  // animate icons and color bars back in after theme change
   gsap
     .to(playableIconsEl, {
       opacity: 1,
@@ -410,13 +419,15 @@ const handleGameBoardReset = async () => {
       }).delay(0.5);
     });
 
-  activeGame = true;
-
+  // prompt browser to make first move
   setTimeout(() => {
     revealFirstIcon();
   }, 3000);
 
+  // enable the game board to be playable (clickable)
+  activeGame = true;
   gameBoardEl.removeEventListener('click', handleGameBoardReset);
 };
 
+// handle initial theme reset on first game board click
 gameBoardEl.addEventListener('click', handleGameBoardReset);
