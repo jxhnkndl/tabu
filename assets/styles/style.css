@@ -223,7 +223,7 @@
 
 .game-icon {
   transform: scale(0.75);
-  transition: all 0.25 ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 @media (min-width: 30rem) {
   .game-icon {
@@ -233,6 +233,32 @@
 @media (min-width: 64rem) {
   .game-icon {
     transform: scale(1.15);
+  }
+}
+.game-icon:hover {
+  transform: scale(0.82);
+}
+@media (min-width: 30rem) {
+  .game-icon:hover {
+    transform: scale(1.07);
+  }
+}
+@media (min-width: 64rem) {
+  .game-icon:hover {
+    transform: scale(1.22);
+  }
+}
+.game-icon:active {
+  transform: scale(0.7);
+}
+@media (min-width: 30rem) {
+  .game-icon:active {
+    transform: scale(0.9);
+  }
+}
+@media (min-width: 64rem) {
+  .game-icon:active {
+    transform: scale(1.05);
   }
 }
 .game-icon-init {

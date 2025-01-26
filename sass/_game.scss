@@ -32,7 +32,7 @@
 
 .game-icon {
   transform: scale(0.75);
-  transition: all 0.25 ease-in-out;
+  transition: all 0.25s ease-in-out;
 
   @include phone {
     transform: scale(1);
@@ -40,6 +40,30 @@
 
   @include desktop {
     transform: scale(1.15);
+  }
+
+  &:hover {
+    transform: scale(0.82);
+
+    @include phone {
+      transform: scale(1.07);
+    }
+
+    @include desktop {
+      transform: scale(1.22);
+    }
+  }
+
+  &:active {
+    transform: scale(0.7);
+
+    @include phone {
+      transform: scale(0.9);
+    }
+
+    @include desktop {
+      transform: scale(1.05);
+    }
   }
 
   &-init {
