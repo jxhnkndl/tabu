@@ -23,28 +23,6 @@
       justify-content: center;
       width: 100%;
 
-      .game-icon {
-        transform: scale(0.75);
-        transition: all 0.25 ease-in-out;
-
-        @include phone {
-          transform: scale(1)
-        }
-
-        @include desktop {
-          transform: scale(1.15);
-        }
-
-        &-init {
-          opacity: 0.35;
-        }
-
-        &-hidden {
-          display: none;
-          opacity: 0;
-        }
-      }
-
       &-color {
         height: clamp(0.75rem, 0.393rem + 0.952vw, 1.25rem);
       }
@@ -53,7 +31,23 @@
 }
 
 .game-icon {
+  transform: scale(0.75);
+  transition: all 0.25 ease-in-out;
+
+  @include phone {
+    transform: scale(1);
+  }
+
+  @include desktop {
+    transform: scale(1.15);
+  }
+
+  &-init {
+    opacity: 0.35;
+  }
+
   &-hidden {
     display: none;
+    opacity: 0;
   }
 }
