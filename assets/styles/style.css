@@ -6,12 +6,20 @@
   color: #edd91f;
 }
 
+.yellow-border {
+  border: 1px solid #edd91f;
+}
+
 .green-bg {
   background-color: #00b456;
 }
 
 .green-text {
   color: #00b456;
+}
+
+.green-border {
+  border: 1px solid #00b456;
 }
 
 .orange-bg {
@@ -22,6 +30,10 @@
   color: #fe6e06;
 }
 
+.orange-border {
+  border: 1px solid #fe6e06;
+}
+
 .purple-bg {
   background-color: #7933C1;
 }
@@ -30,12 +42,20 @@
   color: #7933C1;
 }
 
+.purple-border {
+  border: 1px solid #7933C1;
+}
+
 .blue-bg {
   background-color: #05aff2;
 }
 
 .blue-text {
   color: #05aff2;
+}
+
+.blue-border {
+  border: 1px solid #05aff2;
 }
 
 .daisy-bg {
@@ -217,9 +237,6 @@
   justify-content: center;
   width: 100%;
 }
-.game-board .row .cell-color {
-  height: clamp(0.75rem, 0.393rem + 0.952vw, 1.25rem);
-}
 
 .game-icon {
   transform: scale(0.75);
@@ -267,6 +284,13 @@
 .game-icon-hidden {
   display: none;
   opacity: 0;
+}
+
+.cell-color {
+  height: clamp(0.75rem, 0.393rem + 0.952vw, 1.25rem);
+}
+.cell-color-purple, .cell-color-green, .cell-color-yellow, .cell-color-orange, .cell-color-blue {
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

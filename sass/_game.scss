@@ -22,10 +22,6 @@
       flex-direction: column;
       justify-content: center;
       width: 100%;
-
-      &-color {
-        height: clamp(0.75rem, 0.393rem + 0.952vw, 1.25rem);
-      }
     }
   }
 }
@@ -73,5 +69,17 @@
   &-hidden {
     display: none;
     opacity: 0;
+  }
+}
+
+.cell-color {
+  height: clamp(0.75rem, 0.393rem + 0.952vw, 1.25rem);
+
+  &-purple,
+  &-green,
+  &-yellow,
+  &-orange,
+  &-blue {
+    width: 100%;
   }
 }

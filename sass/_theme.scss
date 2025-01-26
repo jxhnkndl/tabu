@@ -8,12 +8,20 @@
   color: $yellow;
 }
 
+.yellow-border {
+  border: 1px solid $yellow;
+}
+
 .green-bg {
   background-color: $green;
 }
 
 .green-text {
   color: $green;
+}
+
+.green-border {
+  border: 1px solid $green;
 }
 
 .orange-bg {
@@ -24,6 +32,10 @@
   color: $orange;
 }
 
+.orange-border {
+  border: 1px solid $orange;
+}
+
 .purple-bg {
   background-color: $purple;
 }
@@ -32,12 +44,20 @@
   color: $purple;
 }
 
+.purple-border {
+  border: 1px solid $purple;
+}
+
 .blue-bg {
   background-color: $blue;
 }
 
 .blue-text {
   color: $blue;
+}
+
+.blue-border {
+  border: 1px solid $blue;
 }
 
 .daisy-bg {

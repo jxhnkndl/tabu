@@ -1,9 +1,16 @@
 /**** GLOBALS ****/
 
 const gameBoardEl = document.querySelector('.game-board');
-const colorBarsEl = document.querySelectorAll('.cell-color');
 const allIconsEl = document.querySelectorAll('.game-icon');
 const playableIconsEl = document.querySelectorAll('.game-icon-playable');
+const firstIconEl = document.querySelector('.first-icon');
+const colorBarsEl = document.querySelectorAll('.cell-color');
+const colorContainersEl = document.querySelectorAll('.color-container');
+const purpleStatusEl = document.querySelector('.cell-color-purple');
+const greenStatusEl = document.querySelector('.cell-color-green');
+const yellowStatusEl = document.querySelector('.cell-color-yellow');
+const orangeStatusEl = document.querySelector('.cell-color-orange');
+const blueStatusEl = document.querySelector('.cell-color-blue');
 
 const gameMatrix = [
   [
@@ -194,11 +201,26 @@ const gameMatrix = [
 ];
 
 const scoreboard = {
-  blue: 0,
-  green: 0,
-  orange: 0,
-  purple: 0,
-  yellow: 1,
+  purple: {
+    remaining: 5,
+    statusBar: purpleStatusEl,
+  },
+  green: {
+    remaining: 5,
+    statusBar: greenStatusEl,
+  },
+  yellow: {
+    remaining: 5,
+    statusBar: yellowStatusEl,
+  },
+  orange: {
+    remaining: 5,
+    statusBar: orangeStatusEl,
+  },
+  blue: {
+    remaining: 5,
+    statusBar: blueStatusEl,
+  },
 };
 
 let activeGame = false;
@@ -253,8 +275,25 @@ const handleIconClick = (clickedCell, matchingCell) => {
     });
   }, 250);
 
-  // increase color's click count
-  scoreboard[matchingCell.color] += 1;
+  // increase color's click count and status bar
+  updateScore(clickedCell, matchingCell);
+};
+
+// update color status bars
+const updateScore = (clickedCell, matchingCell) => {
+  const color = matchingCell.color;
+
+  if (scoreboard[color].remaining > 0) {
+    scoreboard[color].remaining -= 1;
+
+    let status = (100 / 5) * scoreboard[color].remaining;
+
+    gsap.to(scoreboard[color].statusBar, {
+      scaleX: status / 100,
+      duration: 0.5,
+      ease: 'power3.inOut',
+    });
+  }
 
   console.log(scoreboard);
 };
@@ -298,11 +337,23 @@ const resetBoard = () => {
 
 // reset color bars from init to match playable icon colors
 const resetColorBars = () => {
-  console.log(colorBarsEl);
   colorBarsEl[0].classList.replace('light-bg', 'purple-bg');
   colorBarsEl[1].classList.replace('daisy-bg', 'green-bg');
   colorBarsEl[3].classList.replace('sunset-bg', 'orange-bg');
   colorBarsEl[4].classList.replace('orange-bg', 'blue-bg');
+
+  colorContainersEl[0].classList.add('purple-border');
+  colorContainersEl[1].classList.add('green-border');
+  colorContainersEl[2].classList.add('yellow-border');
+  colorContainersEl[3].classList.add('orange-border');
+  colorContainersEl[4].classList.add('blue-border');
+};
+
+// set up browser to make first play
+const revealFirstIcon = () => {
+  const matchingCell = gameMatrix[2][2];
+
+  handleIconClick(firstIconEl, matchingCell);
 };
 
 // reset the game board from init to playable on click
@@ -323,11 +374,17 @@ const handleGameBoardReset = async () => {
         stagger: 0.05,
         ease: 'power3.inOut',
       });
+    })
+    .then(() => {
+      gsap.to(colorContainersEl, {
+        opacity: 0,
+        duration: 0.25,
+        stagger: 0.05,
+        ease: 'power3.inOut',
+      })
     });
 
   await resetBoard();
-
-  console.log('BOARD RESET');
 
   gsap
     .to(playableIconsEl, {
@@ -337,15 +394,27 @@ const handleGameBoardReset = async () => {
       ease: 'power3.inOut',
     })
     .then(() => {
-      gsap.to(colorBarsEl, {
+      gsap.to(colorContainersEl, {
         opacity: 1,
         duration: 0.5,
         stagger: 0.05,
         ease: 'power3.inOut',
       });
+    })
+    .then(() => {
+      gsap.to(colorBarsEl, {
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: 'power3.inOut',
+      }).delay(0.5);
     });
 
   activeGame = true;
+
+  setTimeout(() => {
+    revealFirstIcon();
+  }, 3000);
 
   gameBoardEl.removeEventListener('click', handleGameBoardReset);
 };
