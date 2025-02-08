@@ -19,8 +19,17 @@
       width: clamp(4.75rem, 3.647rem + 3.676vw, 6rem);
 
       .logo {
-        object-fit: cover;
-        width: 100%;
+        color: $yellow;
+        font-family: $font-family-primary;
+        font-weight: 500;
+        
+        &-negative-spacing {
+          margin-left: -5px;
+        }
+
+        &-positive-spacing {
+          margin-left: 2px;
+        }
       }
     }
 

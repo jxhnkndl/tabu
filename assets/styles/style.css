@@ -137,8 +137,15 @@
   width: clamp(4.75rem, 3.647rem + 3.676vw, 6rem);
 }
 .header-container .logo-container .logo {
-  object-fit: cover;
-  width: 100%;
+  color: #edd91f;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+.header-container .logo-container .logo-negative-spacing {
+  margin-left: -5px;
+}
+.header-container .logo-container .logo-positive-spacing {
+  margin-left: 2px;
 }
 .header-container .menu-container {
   align-items: center;
