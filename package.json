@@ -2,11 +2,20 @@
   "name": "tabu",
   "version": "1.0.0",
   "scripts": {
-    "watch": "sass --watch ./sass/main.scss ./assets/styles/style.css"
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "watch": "sass --watch ./assets/sass/main.scss ./assets/styles/style.css"
   },
   "author": "jxhnkndl",
   "license": "ISC",
   "devDependencies": {
-    "sass": "^1.83.4"
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "sass": "^1.83.4",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
   }
 }
