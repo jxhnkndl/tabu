@@ -12,6 +12,10 @@ const yellowStatusEl = document.querySelector('.cell-color-yellow');
 const orangeStatusEl = document.querySelector('.cell-color-orange');
 const blueStatusEl = document.querySelector('.cell-color-blue');
 
+let activeGame = false;
+let winner = false;
+let winningColor;
+
 const gameMatrix = [
   [
     {
@@ -19,6 +23,7 @@ const gameMatrix = [
       row: 1,
       color: 'green',
       iconPath: './assets/images/symbols-green/pentagram-green.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pentagram-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -26,6 +31,7 @@ const gameMatrix = [
       row: 1,
       color: 'purple',
       iconPath: './assets/images/symbols-purple/fingerprint-purple.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/fingerprint-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -33,6 +39,7 @@ const gameMatrix = [
       row: 1,
       color: 'yellow',
       iconPath: './assets/images/symbols-yellow/void-yellow.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/void-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -40,6 +47,7 @@ const gameMatrix = [
       row: 1,
       color: 'orange',
       iconPath: './assets/images/symbols-orange/pyramid-orange.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pyramid-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -47,6 +55,7 @@ const gameMatrix = [
       row: 1,
       color: 'blue',
       iconPath: './assets/images/symbols-blue/inverted-pyramid-blue.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/inverted-pyramid-${winningColor}.svg`,
       revealed: false,
     },
   ],
@@ -56,6 +65,7 @@ const gameMatrix = [
       row: 2,
       color: 'blue',
       iconPath: './assets/images/symbols-blue/fingerprint-blue.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/fingerprint-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -63,6 +73,7 @@ const gameMatrix = [
       row: 2,
       color: 'orange',
       iconPath: './assets/images/symbols-orange/pentagram-orange.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pentagram-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -70,6 +81,7 @@ const gameMatrix = [
       row: 2,
       color: 'green',
       iconPath: './assets/images/symbols-green/pyramid-green.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pyramid-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -77,6 +89,7 @@ const gameMatrix = [
       row: 2,
       color: 'yellow',
       iconPath: './assets/images/symbols-yellow/inverted-pyramid-yellow.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/inverted-pyramid-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -84,6 +97,7 @@ const gameMatrix = [
       row: 2,
       color: 'purple',
       iconPath: './assets/images/symbols-purple/void-purple.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/void-${winningColor}.svg`,
       revealed: false,
     },
   ],
@@ -93,6 +107,7 @@ const gameMatrix = [
       row: 3,
       color: 'orange',
       iconPath: './assets/images/symbols-orange/void-orange.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/void-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -100,6 +115,7 @@ const gameMatrix = [
       row: 3,
       color: 'orange',
       iconPath: './assets/images/symbols-orange/inverted-pyramid-orange.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/inverted-pyramid-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -107,6 +123,7 @@ const gameMatrix = [
       row: 3,
       color: 'purple',
       iconPath: './assets/images/symbols-purple/pyramid-purple.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pyramid-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -114,6 +131,7 @@ const gameMatrix = [
       row: 3,
       color: 'green',
       iconPath: './assets/images/symbols-green/fingerprint-green.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/fingerprint-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -121,6 +139,7 @@ const gameMatrix = [
       row: 3,
       color: 'blue',
       iconPath: './assets/images/symbols-blue/pentagram-blue.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pentagram-${winningColor}.svg`,
       revealed: false,
     },
   ],
@@ -130,6 +149,7 @@ const gameMatrix = [
       row: 4,
       color: 'yellow',
       iconPath: './assets/images/symbols-yellow/pyramid-yellow.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pyramid-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -137,6 +157,7 @@ const gameMatrix = [
       row: 4,
       color: 'orange',
       iconPath: './assets/images/symbols-orange/fingerprint-orange.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/fingerprint-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -144,6 +165,7 @@ const gameMatrix = [
       row: 4,
       color: 'blue',
       iconPath: './assets/images/symbols-blue/void-blue.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/void-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -151,6 +173,7 @@ const gameMatrix = [
       row: 4,
       color: 'purple',
       iconPath: './assets/images/symbols-purple/pentagram-purple.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pentagram-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -158,6 +181,7 @@ const gameMatrix = [
       row: 4,
       color: 'green',
       iconPath: './assets/images/symbols-green/inverted-pyramid-green.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/inverted-pyramid-${winningColor}.svg`,
       revealed: false,
     },
   ],
@@ -167,6 +191,7 @@ const gameMatrix = [
       row: 5,
       color: 'purple',
       iconPath: './assets/images/symbols-purple/inverted-pyramid-purple.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/inverted-pyramid-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -174,6 +199,7 @@ const gameMatrix = [
       row: 5,
       color: 'blue',
       iconPath: './assets/images/symbols-blue/pyramid-blue.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pyramid-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -181,6 +207,7 @@ const gameMatrix = [
       row: 5,
       color: 'yellow',
       iconPath: './assets/images/symbols-yellow/fingerprint-yellow.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/fingerprint-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -188,6 +215,7 @@ const gameMatrix = [
       row: 5,
       color: 'green',
       iconPath: './assets/images/symbols-green/void-green.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/void-${winningColor}.svg`,
       revealed: false,
     },
     {
@@ -195,6 +223,7 @@ const gameMatrix = [
       row: 5,
       color: 'yellow',
       iconPath: './assets/images/symbols-yellow/pentagram-yellow.svg',
+      winningPath: `./assets/images/symbols-${winningColor}/pentagram-${winningColor}.svg`,
       revealed: false,
     },
   ],
@@ -223,13 +252,10 @@ const scoreboard = {
   },
 };
 
-let activeGame = false;
-let winner = false;
-
 /**** GAME LOGIC ****/
 
 // capture user clicks
-gameBoardEl.addEventListener('click', (e) => {
+const handleGameBoardClick = (e) => {
   let clickedEl = e.target;
   let clickedCell;
 
@@ -252,7 +278,7 @@ gameBoardEl.addEventListener('click', (e) => {
 
     handleIconClick(clickedCell, matchingCell);
   }
-});
+};
 
 // update ui and game state after icon click
 const handleIconClick = (clickedCell, matchingCell) => {
@@ -267,6 +293,7 @@ const handleIconClick = (clickedCell, matchingCell) => {
   // fade icon back into viewport
   setTimeout(() => {
     clickedCell.children[0].src = matchingCell.iconPath;
+    matchingCell.revealed = true;
 
     gsap.to(clickedCell, {
       opacity: 1,
@@ -295,7 +322,7 @@ const updateScore = (clickedCell, matchingCell) => {
     });
   }
 
-  console.log(scoreboard);
+  checkWinner();
 };
 
 /**** INTRO ANIMATIONS ****/
@@ -330,7 +357,7 @@ const resetBoard = () => {
         }
       });
 
-      resetColorBars();
+      setColorBars();
 
       resolve();
     }, 3000);
@@ -388,7 +415,7 @@ const handleGameBoardReset = async () => {
         duration: 0.25,
         stagger: 0.05,
         ease: 'power3.inOut',
-      })
+      });
     });
 
   // reset theme of the color bars
@@ -411,12 +438,14 @@ const handleGameBoardReset = async () => {
       });
     })
     .then(() => {
-      gsap.to(colorBarsEl, {
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.05,
-        ease: 'power3.inOut',
-      }).delay(0.5);
+      gsap
+        .to(colorBarsEl, {
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.05,
+          ease: 'power3.inOut',
+        })
+        .delay(0.5);
     });
 
   // prompt browser to make first move
@@ -431,3 +460,4 @@ const handleGameBoardReset = async () => {
 
 // handle initial theme reset on first game board click
 gameBoardEl.addEventListener('click', handleGameBoardReset);
+gameBoardEl.addEventListener('click', handleGameBoardClick);
