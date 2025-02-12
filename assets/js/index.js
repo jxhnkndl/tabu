@@ -1,306 +1,23 @@
-/**** GLOBALS ****/
-
+// Gameboard
 const gameBoardEl = document.querySelector('.game-board');
+
+// Game icons
 const allIconsEl = document.querySelectorAll('.game-icon');
 const playableIconsEl = document.querySelectorAll('.game-icon-playable');
 const firstIconEl = document.querySelector('.first-icon');
+
+// Color bars
 const colorBarsEl = document.querySelectorAll('.cell-color');
 const colorContainersEl = document.querySelectorAll('.color-container');
+
+// Color bar progress indicators
 const purpleStatusEl = document.querySelector('.cell-color-purple');
+const blueStatusEl = document.querySelector('.cell-color-blue');
 const greenStatusEl = document.querySelector('.cell-color-green');
 const yellowStatusEl = document.querySelector('.cell-color-yellow');
 const orangeStatusEl = document.querySelector('.cell-color-orange');
-const blueStatusEl = document.querySelector('.cell-color-blue');
 
-const gameMatrix = [
-  [
-    {
-      id: 'cell-1a',
-      row: 1,
-      color: 'green',
-      iconPath: './assets/images/symbols-green/pentagram-green.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-1b',
-      row: 1,
-      color: 'purple',
-      iconPath: './assets/images/symbols-purple/fingerprint-purple.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-1c',
-      row: 1,
-      color: 'yellow',
-      iconPath: './assets/images/symbols-yellow/void-yellow.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-1d',
-      row: 1,
-      color: 'orange',
-      iconPath: './assets/images/symbols-orange/pyramid-orange.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-1e',
-      row: 1,
-      color: 'blue',
-      iconPath: './assets/images/symbols-blue/inverted-pyramid-blue.svg',
-      revealed: false,
-    },
-  ],
-  [
-    {
-      id: 'cell-2a',
-      row: 2,
-      color: 'blue',
-      iconPath: './assets/images/symbols-blue/fingerprint-blue.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-2b',
-      row: 2,
-      color: 'orange',
-      iconPath: './assets/images/symbols-orange/pentagram-orange.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-2c',
-      row: 2,
-      color: 'green',
-      iconPath: './assets/images/symbols-green/pyramid-green.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-2d',
-      row: 2,
-      color: 'yellow',
-      iconPath: './assets/images/symbols-yellow/inverted-pyramid-yellow.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-2e',
-      row: 2,
-      color: 'purple',
-      iconPath: './assets/images/symbols-purple/void-purple.svg',
-      revealed: false,
-    },
-  ],
-  [
-    {
-      id: 'cell-3a',
-      row: 3,
-      color: 'orange',
-      iconPath: './assets/images/symbols-orange/void-orange.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-3b',
-      row: 3,
-      color: 'orange',
-      iconPath: './assets/images/symbols-orange/inverted-pyramid-orange.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-3c',
-      row: 3,
-      color: 'purple',
-      iconPath: './assets/images/symbols-purple/pyramid-purple.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-3d',
-      row: 3,
-      color: 'green',
-      iconPath: './assets/images/symbols-green/fingerprint-green.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-3e',
-      row: 3,
-      color: 'blue',
-      iconPath: './assets/images/symbols-blue/pentagram-blue.svg',
-      revealed: false,
-    },
-  ],
-  [
-    {
-      id: 'cell-4a',
-      row: 4,
-      color: 'yellow',
-      iconPath: './assets/images/symbols-yellow/pyramid-yellow.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-4b',
-      row: 4,
-      color: 'orange',
-      iconPath: './assets/images/symbols-orange/fingerprint-orange.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-4c',
-      row: 4,
-      color: 'blue',
-      iconPath: './assets/images/symbols-blue/void-blue.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-4d',
-      row: 4,
-      color: 'purple',
-      iconPath: './assets/images/symbols-purple/pentagram-purple.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-4e',
-      row: 4,
-      color: 'green',
-      iconPath: './assets/images/symbols-green/inverted-pyramid-green.svg',
-      revealed: false,
-    },
-  ],
-  [
-    {
-      id: 'cell-5a',
-      row: 5,
-      color: 'purple',
-      iconPath: './assets/images/symbols-purple/inverted-pyramid-purple.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-5b',
-      row: 5,
-      color: 'blue',
-      iconPath: './assets/images/symbols-blue/pyramid-blue.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-5c',
-      row: 5,
-      color: 'yellow',
-      iconPath: './assets/images/symbols-yellow/fingerprint-yellow.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-5d',
-      row: 5,
-      color: 'green',
-      iconPath: './assets/images/symbols-green/void-green.svg',
-      revealed: false,
-    },
-    {
-      id: 'cell-5e',
-      row: 5,
-      color: 'yellow',
-      iconPath: './assets/images/symbols-yellow/pentagram-yellow.svg',
-      revealed: false,
-    },
-  ],
-];
-
-const scoreboard = {
-  purple: {
-    remaining: 5,
-    statusBar: purpleStatusEl,
-  },
-  green: {
-    remaining: 5,
-    statusBar: greenStatusEl,
-  },
-  yellow: {
-    remaining: 5,
-    statusBar: yellowStatusEl,
-  },
-  orange: {
-    remaining: 5,
-    statusBar: orangeStatusEl,
-  },
-  blue: {
-    remaining: 5,
-    statusBar: blueStatusEl,
-  },
-};
-
-let activeGame = false;
-let winner = false;
-
-/**** GAME LOGIC ****/
-
-// capture user clicks
-gameBoardEl.addEventListener('click', (e) => {
-  let clickedEl = e.target;
-  let clickedCell;
-
-  // ensure icon's parent cell is the captured target element
-  if (clickedEl.classList.contains('cell')) {
-    clickedCell = clickedEl;
-  } else if (clickedEl.parentElement.classList.contains('cell')) {
-    clickedCell = clickedEl.parentElement;
-  }
-
-  // match clicked icon with matching icon in game matrix
-  if (clickedCell && !winner && activeGame) {
-    let cellId = clickedCell.classList[1];
-    let rowId = cellId.split('-')[1].split('')[0];
-    let matchingRow = gameMatrix[rowId - 1];
-
-    let matchingCell = matchingRow.find((cell) => {
-      return cell.id === cellId && !cell.revealed;
-    });
-
-    handleIconClick(clickedCell, matchingCell);
-  }
-});
-
-// update ui and game state after icon click
-const handleIconClick = (clickedCell, matchingCell) => {
-  // fade dark icon out of viewport
-  gsap.to(clickedCell, {
-    opacity: 0,
-    duration: 0.25,
-    ease: 'power3.inOut',
-  });
-
-  // reset the game icon's src to the colored icon
-  // fade icon back into viewport
-  setTimeout(() => {
-    clickedCell.children[0].src = matchingCell.iconPath;
-
-    gsap.to(clickedCell, {
-      opacity: 1,
-      duration: 0.25,
-      ease: 'power3.inOut',
-    });
-  }, 250);
-
-  // increase color's click count and status bar
-  updateScore(clickedCell, matchingCell);
-};
-
-// update color status bars
-const updateScore = (clickedCell, matchingCell) => {
-  const color = matchingCell.color;
-
-  if (scoreboard[color].remaining > 0) {
-    scoreboard[color].remaining -= 1;
-
-    let status = (100 / 5) * scoreboard[color].remaining;
-
-    gsap.to(scoreboard[color].statusBar, {
-      scaleX: status / 100,
-      duration: 0.5,
-      ease: 'power3.inOut',
-    });
-  }
-
-  console.log(scoreboard);
-};
-
-/**** INTRO ANIMATIONS ****/
-
-// intro opacity wave
+// Intro opacity wave animation
 const introAnimation = gsap
   .to(allIconsEl, {
     opacity: 0.5,
@@ -312,8 +29,8 @@ const introAnimation = gsap
   })
   .repeatDelay(0.25);
 
-// swap game icon classes to set board for game play
-const resetBoard = () => {
+// Swap game icon classes to set board for game play
+const swapGameIconClasses = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       allIconsEl.forEach((icon) => {
@@ -337,15 +54,14 @@ const resetBoard = () => {
   });
 };
 
-// reset color bars from init to match playable icon colors
+// Reset color bars from init to match playable icon colors
 const resetColorBars = () => {
-  // reset background colors
-  colorBarsEl[0].classList.replace('light-bg', 'purple-bg');
-  colorBarsEl[1].classList.replace('daisy-bg', 'green-bg');
-  colorBarsEl[3].classList.replace('sunset-bg', 'orange-bg');
-  colorBarsEl[4].classList.replace('orange-bg', 'blue-bg');
+  colorBarsEl[0].classList.replace('yellow-100-bg', 'purple-bg');
+  colorBarsEl[1].classList.replace('yellow-300-bg', 'green-bg');
+  colorBarsEl[2].classList.replace('yellow-500-bg', 'yellow-bg');
+  colorBarsEl[3].classList.replace('yellow-700-bg', 'orange-bg');
+  colorBarsEl[4].classList.replace('yellow-theme-accent-bg', 'blue-bg');
 
-  // add borders to aid in progress tracking
   colorContainersEl[0].classList.add('purple-border');
   colorContainersEl[1].classList.add('green-border');
   colorContainersEl[2].classList.add('yellow-border');
@@ -353,78 +69,57 @@ const resetColorBars = () => {
   colorContainersEl[4].classList.add('blue-border');
 };
 
-// set up browser to make first play
-const revealFirstIcon = () => {
-  const matchingCell = gameMatrix[2][2];
-
-  // pass starting cell through game logic chain
-  // swap dark icon for themed icon and update color bar
-  handleIconClick(firstIconEl, matchingCell);
-};
-
-// reset the game board from init to playable on click
+// Reset the game board from init to playable on click
 const handleGameBoardReset = async () => {
   introAnimation.kill();
 
-  // animate icons and color bars out before theme change
-  gsap
+  const fadeOutTimeline = gsap.timeline();
+  const fadeInTimeline = gsap.timeline();
+
+  // Fade out game icons and color bars before reset
+  fadeOutTimeline
     .to(allIconsEl, {
       opacity: 0,
       duration: 0.5,
       stagger: 0.05,
       ease: 'power3.inOut',
     })
-    .then(() => {
-      gsap.to(colorBarsEl, {
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.05,
-        ease: 'power3.inOut',
-      });
-    })
-    .then(() => {
-      gsap.to(colorContainersEl, {
-        opacity: 0,
-        duration: 0.25,
-        stagger: 0.05,
-        ease: 'power3.inOut',
-      })
+    .to(colorBarsEl, {
+      opacity: 0,
+      duration: 0,
+      stagger: 0.05,
+      ease: 'power3.inOut',
+    }, ">")
+    .to(colorContainersEl, {
+      opacity: 0,
+      duration: 0.25,
+      stagger: 0.05,
+      ease: 'power3.inOut',
     });
 
-  // reset theme of the color bars
-  await resetBoard();
+  // Reset theme of the color bars
+  await swapGameIconClasses();
 
-  // animate icons and color bars back in after theme change
-  gsap
+  // Fade game icons and color bars back in
+  fadeInTimeline
     .to(playableIconsEl, {
       opacity: 1,
       duration: 0.5,
       stagger: 0.05,
       ease: 'power3.inOut',
     })
-    .then(() => {
-      gsap.to(colorContainersEl, {
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.05,
-        ease: 'power3.inOut',
-      });
-    })
-    .then(() => {
-      gsap.to(colorBarsEl, {
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.05,
-        ease: 'power3.inOut',
-      }).delay(0.5);
-    });
-
-  // prompt browser to make first move
-  setTimeout(() => {
-    revealFirstIcon();
-  }, 3000);
-
-  // enable the game board to be playable (clickable)
+    .to(colorContainersEl, {
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: 'power3.inOut',
+    }).to(colorBarsEl, {
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: 'power3.inOut',
+    }).delay(0.5);
+  // Enable the game board to be playable (clickable)
   activeGame = true;
   gameBoardEl.removeEventListener('click', handleGameBoardReset);
 };
