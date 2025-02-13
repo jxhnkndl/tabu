@@ -314,32 +314,3 @@ const scoreboard = {
     statusBar: blueStatusEl,
   },
 };
-
-/* GLOBAL FUNCTIONS */
-
-// Handle icon clicks on gameboard
-const handleIconClick = (clickedCell) => {
-  const matrixCell = gameboard.flat().find((cell) => cell.id === clickedCell.classList[1] && !cell.revealed);
-
-  console.log(clickedCell)
-  console.log(matrixCell)
-
-  gsap.to(clickedCell, {
-    opacity: 0,
-    duration: 0.25,
-    ease: 'power3.inOut'
-  });
-
-  setTimeout(() => {
-    console.log(clickedCell)
-
-    clickedCell.children[0].src = matrixCell.color;
-    matrixCell.revealed = true;
-
-    gsap.to(clickedCell, {
-      opacity: 1,
-      duration: 0.25,
-      ease: 'power3.inOut',
-    });
-  }, 250);
-}
