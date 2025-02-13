@@ -11,7 +11,7 @@ const handleGameBoardClick = (e) => {
   }
 
   // Prevent icon clicks from triggering color changes before game has started
-  if (clickedCell && !winner && isActiveGame) {
+  if (clickedCell && !isWinner && isActiveGame) {
     handleIconClick(clickedCell)
   }
 }
@@ -62,7 +62,26 @@ const updateStatusBars = (clickedCell, matrixCell) => {
       duration: 0.5,
       ease: 'power3.inOut',
     });
+
+    checkWinner();
   }
+}
+
+// Check winning conditions
+const checkWinner = () => {
+  const { remaining: green } = scoreboard.green;
+  const { remaining: yellow} = scoreboard.yellow;
+  const { remaining: orange } = scoreboard.orange;
+  const { remaining: purple } = scoreboard.purple;
+  const { remaining: blue } = scoreboard.blue;
+
+  const colors = [green, yellow, orange, purple, blue];
+
+  colors.forEach((color) => {
+    if (color === 0) {
+      isWinner = true;
+    }
+  })
 }
 
 gameBoardEl.addEventListener('click', handleGameBoardClick);

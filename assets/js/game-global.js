@@ -364,7 +364,7 @@ const gameboard = [
 // General game play variables
 let isActiveGame = false;
 let firstCell = gameboard[2][2];
-let winner = false;
+let isWinner = false;
 
 // Scoreboard
 const scoreboard = {
