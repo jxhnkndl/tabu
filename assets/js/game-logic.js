@@ -69,17 +69,10 @@ const updateStatusBars = (clickedCell, matrixCell) => {
 
 // Check winning conditions
 const checkWinner = () => {
-  const { remaining: green } = scoreboard.green;
-  const { remaining: yellow} = scoreboard.yellow;
-  const { remaining: orange } = scoreboard.orange;
-  const { remaining: purple } = scoreboard.purple;
-  const { remaining: blue } = scoreboard.blue;
-
-  const colors = [green, yellow, orange, purple, blue];
-
-  colors.forEach((color) => {
-    if (color === 0) {
+  Object.keys(scoreboard).forEach((color) => {
+    if (scoreboard[color].remaining === 0) {
       isWinner = true;
+      winningColor = color;
     }
   })
 }
