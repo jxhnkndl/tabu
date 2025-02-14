@@ -62,19 +62,7 @@ const updateStatusBars = (clickedCell, matrixCell) => {
       duration: 0.5,
       ease: 'power3.inOut',
     });
-
-    checkWinner();
   }
-}
-
-// Check winning conditions
-const checkWinner = () => {
-  Object.keys(scoreboard).forEach((color) => {
-    if (scoreboard[color].remaining === 0) {
-      isWinner = true;
-      winningColor = color;
-    }
-  })
 }
 
 gameBoardEl.addEventListener('click', handleGameBoardClick);
