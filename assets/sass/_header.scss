@@ -19,10 +19,29 @@
       width: clamp(4.75rem, 3.647rem + 3.676vw, 6rem);
 
       .logo {
-        color: $yellow;
         font-family: $font-family-primary;
         font-weight: 500;
+
+        &-purple {
+          color: $purple;
+        }
+
+        &-green {
+          color: $green;
+        }
+
+        &-yellow {
+          color: $yellow;
+        }
         
+        &-orange {
+          color: $orange;
+        }
+
+        &-blue {
+          color: $blue;
+        }
+
         &-negative-spacing {
           margin-left: -5px;
         }

@@ -1,5 +1,8 @@
 /* GLOBAL VARIABLES */
 
+// Band logo
+const h1El = document.querySelector('h1');
+
 // Gameboard
 const gameBoardEl = document.querySelector('.game-board');
 

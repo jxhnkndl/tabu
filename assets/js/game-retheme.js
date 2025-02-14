@@ -75,11 +75,21 @@ const animateIcons = async () => {
       duration: 0.25,
       stagger: 0.05,
       ease: 'power3.inOut',
+    })
+    .to(h1El, {
+      opacity: 0,
+      duration: 0.25,
+      ease: 'power3.inOut'
     });
 
   await swapIcons();
 
   fadeInTimeline
+    .to(h1El, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power3.inOut'
+    })
     .to(playableIconsEl, {
       opacity: 1,
       duration: 0.5,
@@ -105,6 +115,9 @@ const animateIcons = async () => {
 const swapIcons = async () => {
   return new Promise((resolve) => {
     setTimeout(() => {
+      h1El.classList.remove('yellow-text');
+      h1El.classList.add(`logo-${winningColor}`);
+
       img1a.src = `./assets/images/symbols-${winningColor}/pentagram-${winningColor}.svg`;
       img1b.src = `./assets/images/symbols-${winningColor}/fingerprint-${winningColor}.svg`;
       img1c.src = `./assets/images/symbols-${winningColor}/void-${winningColor}.svg`;
@@ -167,7 +180,7 @@ const swapIcons = async () => {
       });
 
       resolve();
-    }, 5000);
+    }, 3000);
   });
 };
 
