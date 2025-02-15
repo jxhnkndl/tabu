@@ -63,29 +63,29 @@
         display: flex;
         flex-direction: column;
         gap: 0.4rem;
+        transform: rotate(90deg);
 
         .menu-bar {
-          height: 1.5px;
+          height: 2px;
 
           @include tablet {
             height: 2.5px;
           }
         }
 
-        .menu-bar-top {
-          width: 45px;
-        }
-
-        .menu-bar-middle-top {
-          width: 35px;
-        }
-
-        .menu-bar-middle-bottom {
+        .menu-bar-left {
           width: 25px;
+          transform: translateX(5px);
         }
 
-        .menu-bar-bottom {
-          width: 10px;
+        .menu-bar-middle {
+          width: 25px;
+          transform: translateX(-5px);
+        }
+
+        .menu-bar-right {
+          width: 25px;
+          transform: translateX(5px);
         }
       }
     }

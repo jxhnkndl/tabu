@@ -32,6 +32,11 @@ const img5c = document.querySelector('.cell-5c').children[0];
 const img5d = document.querySelector('.cell-5d').children[0];
 const img5e = document.querySelector('.cell-5e').children[0];
 
+// Menu bars
+const menuBarLeftEl = document.querySelector('.menu-bar-left');
+const menuBarMiddleEl = document.querySelector('.menu-bar-middle');
+const menuBarRightEl = document.querySelector('.menu-bar-right');
+
 // Check winning conditions
 const checkWinner = () => {
   Object.keys(scoreboard).forEach((color) => {
@@ -76,13 +81,28 @@ const animateIcons = async () => {
       stagger: 0.05,
       ease: 'power3.inOut',
     })
+    .to(menuBarLeftEl, {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power3.inOut'
+    })
+    .to(menuBarMiddleEl, {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power3.inOut'
+    }, '<')
+    .to(menuBarRightEl, {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power3.inOut'
+    }, '<')
     .to(h1El, {
       opacity: 0,
-      duration: 0.25,
+      duration: 0.5,
       ease: 'power3.inOut'
-    });
+    }, '<');
 
-  await swapIcons();
+  await resetTheme();
 
   fadeInTimeline
     .to(h1El, {
@@ -90,6 +110,21 @@ const animateIcons = async () => {
       duration: 0.5,
       ease: 'power3.inOut'
     })
+    .to(menuBarLeftEl, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power3.inOut'
+    }, '<')
+    .to(menuBarMiddleEl, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power3.inOut'
+    }, '<')
+    .to(menuBarRightEl, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power3.inOut'
+    }, '<')
     .to(playableIconsEl, {
       opacity: 1,
       duration: 0.5,
@@ -112,11 +147,14 @@ const animateIcons = async () => {
 };
 
 // Reset icons with winning color
-const swapIcons = async () => {
+const resetTheme = async () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      h1El.classList.remove('yellow-text');
-      h1El.classList.add(`logo-${winningColor}`);
+      h1El.classList.replace('yellow-text', `logo-${winningColor}`);
+      
+      menuBarLeftEl.classList.replace('yellow-bg', `${winningColor}-bg`);
+      menuBarMiddleEl.classList.replace('yellow-bg', `${winningColor}-bg`);
+      menuBarRightEl.classList.replace('yellow-bg', `${winningColor}-bg`);
 
       img1a.src = `./assets/images/symbols-${winningColor}/pentagram-${winningColor}.svg`;
       img1b.src = `./assets/images/symbols-${winningColor}/fingerprint-${winningColor}.svg`;
@@ -180,7 +218,7 @@ const swapIcons = async () => {
       });
 
       resolve();
-    }, 3000);
+    }, 3500);
   });
 };
 
